@@ -1,0 +1,15 @@
+int16    left_x
+int16    left_y
+bool    left_btn 
+int16    right_x
+int16    right_y
+bool    right_btn 
+bool    btn1
+bool    btn2
+bool    btn3
+bool    btn4
+bool    sw1
+bool    sw2
+bool    sw3
+uint16   slider1
+uint16   slider2
