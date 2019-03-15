@@ -27,7 +27,7 @@ class JoyBroTeleop():
             linear_vel = (data.left_y/512.0)*self.max_linear_vel
 
         if abs(data.left_x) > self.threshold:    
-            angular_vel = (data.left_x/512.0)*self.max_angular_vel
+            angular_vel = -(data.left_x/512.0)*self.max_angular_vel
 
         twist = Twist()
         twist.linear.x = linear_vel

@@ -1,0 +1,9 @@
+<launch>
+    <arg name="joy_device" default="/dev/ttyACM0"/>
+    <arg name="joy_baud" default="115200"/>
+
+    <node pkg="rosserial_python" type="serial_node.py" name="joy_serial_node" output="log" respawn="true" respawn_delay="10">
+        <param name="port" value="$(arg joy_device)"/>
+        <param name="baud" value="$(arg joy_baud)"/>
+    </node>
+</launch>
