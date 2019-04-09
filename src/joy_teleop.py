@@ -10,6 +10,8 @@ class JoyBroTeleop():
     def __init__(self):
         
         rospy.init_node('joy_bro_teleop', anonymous=True)
+
+        self.state = 'stop'
         
         self.max_linear_vel = rospy.get_param('~max_linear_vel',0.25)
         self.max_angular_vel = rospy.get_param('~max_angular_vel',2)
@@ -23,16 +25,26 @@ class JoyBroTeleop():
         linear_vel = 0
         angular_vel = 0
 
+
+        if self.state == 'stop' and data.btn3 == 1:
+            self.state = 'move'
+
+        if(self.state == 'move' and data.btn3 == 0):
+            twist = Twist()
+            self.pub.publish(twist)
+            self.state = 'stop'
+
         if abs(data.left_y) > self.threshold:
             linear_vel = (data.left_y/512.0)*self.max_linear_vel
 
         if abs(data.left_x) > self.threshold:    
             angular_vel = -(data.left_x/512.0)*self.max_angular_vel
 
-        twist = Twist()
-        twist.linear.x = linear_vel
-        twist.angular.z = angular_vel
-        self.pub.publish(twist)
+        if (self.state == 'move'):
+            twist = Twist()
+            twist.linear.x = linear_vel
+            twist.angular.z = angular_vel
+            self.pub.publish(twist)
 
 
     def run(self):
