@@ -2,7 +2,7 @@
     <include file="$(find joybro)/launch/joy_serial.launch"/>
 
     <node pkg="joybro" type="joy_teleop.py" name="joy_bro_teleop" output="screen"> 
-        <param name="max_linear_vel" value="0.25" type="double"/>
+        <param name="max_linear_vel" value="0.35" type="double"/>
         <param name="max_angular_vel" value="2.0" type="double"/>
         <param name="threshold" value="40" type="double"/>
     </node>

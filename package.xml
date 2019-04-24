@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>joybro</name>
-  <version>0.0.0</version>
-  <description>The joybro package</description>
+  <version>0.0.1</version>
+  <description>The joybro joystic package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -59,6 +59,7 @@
   <build_export_depend>std_msgs</build_export_depend>
   <exec_depend>message_generation</exec_depend>
   <exec_depend>message_runtime</exec_depend>
+  <exec_depend>rosserial_python</exec_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
