@@ -1,4 +1,4 @@
-# Пакет ROS для работы с джойстиком joybro
+# Пакет ROS для джойстика joybro
 
 
 ### Установка пакета
@@ -81,4 +81,6 @@ rosrun rosserial_arduino make_libraries.py .
 Команда создаст директорию `ros_lib` которую необходимо переписать в папку библиотек Arduino. Обычно это папка `~/Arduino/libraries`
 
 Необходимо выполнить пересборку библиотек, после установки пакета joybro, для того чтобы в библиотеку появился .h файл для работы с сообщением джойстика `JoyBro.msg`
+
+Более подробно о настройке Arduino http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
 
