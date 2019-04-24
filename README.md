@@ -68,3 +68,17 @@ roslaunch joybro joy_teleop.launch
 
 [Arduino/ros_joybro_subscriber/ros_joybro_subscriber.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro_subscriber/ros_joybro_subscriber.ino)
 
+
+### Созадение библиотеки ros_lib
+
+Для работы с Arduinо, необходимо произвести "сборку" библиотеки ROS для Arduino
+
+```bash
+cd 
+rosrun rosserial_arduino make_libraries.py .
+```
+
+Команда создаст директорию `ros_lib` которую необходимо переписать в папку библиотек Arduino. Обычно это папка `~/Arduino/libraries`
+
+Необходимо выполнить пересборку библиотек, после установки пакета joybro, для того чтобы в библиотеку появился .h файл для работы с сообщением джойстика `JoyBro.msg`
+
