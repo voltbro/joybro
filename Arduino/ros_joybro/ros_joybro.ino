@@ -36,8 +36,24 @@ void loop()
 {
   
   joy_msg.left_x = analogRead(A4) - left_zero_x;
+  joy_msg.left_y = analogRead(A3) - left_zero_y;
+  joy_msg.left_btn = digitalRead(A2);
+  
+  joy_msg.right_x = analogRead(9) - right_zero_x;
+  joy_msg.right_y = analogRead(10) - right_zero_y;
+  joy_msg.right_btn = digitalRead(4);
+
+  joy_msg.slider1 = analogRead(A5);
+  joy_msg.slider2 = analogRead(8);
   
   joy_msg.btn1 = digitalRead(A0);
+  joy_msg.btn2 = digitalRead(A1);
+  joy_msg.btn3 = digitalRead(12);
+  joy_msg.btn4 = digitalRead(11);
+  
+  joy_msg.sw1 = digitalRead(7);
+  joy_msg.sw2 = digitalRead(6);
+  joy_msg.sw3 = digitalRead(5);
   
   chatter.publish( &joy_msg );
   nh.spinOnce();
