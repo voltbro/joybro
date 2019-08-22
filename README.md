@@ -14,7 +14,7 @@ git clone https://github.com/voltbro/joybro
 
 ```bash
 cd ~/catkin_ws
-catkin_make --pkg=joybro
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic --pkg=joybro
 ```
 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
@@ -80,7 +80,7 @@ rosrun rosserial_arduino make_libraries.py .
 
 Команда создаст директорию `ros_lib` которую необходимо переписать в папку библиотек Arduino. Обычно это папка `~/Arduino/libraries`
 
-Необходимо выполнить пересборку библиотек, после установки пакета joybro, для того чтобы в библиотеку появился .h файл для работы с сообщением джойстика `JoyBro.msg`
+Необходимо выполнить пересборку библиотек, после установки пакета joybro, для того чтобы в библиотеке появился .h файл для работы с сообщением джойстика `JoyBro.msg`
 
 Более подробно о настройке Arduino http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
 
