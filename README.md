@@ -20,7 +20,7 @@ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
 
 ```bash
-sudo apt install ros-melodic-rosserial-arduino
+sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
 ```
 
 
