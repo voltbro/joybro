@@ -1,7 +1,7 @@
 # Пакет ROS для джойстика joybro
 
 
-### Установка пакета
+### Установка пакета на компьютер
 
 Для установки пакета, необходимо склонировать репозиторий в вашу папку `catkin_ws/src`
 
@@ -14,7 +14,7 @@ git clone https://github.com/voltbro/joybro
 
 ```bash
 cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
+sudo ./src/catkin/bin/catkin_make --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
 ```
 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
@@ -22,7 +22,27 @@ sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release 
 ```bash
 sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
 ```
+### Установка пакета на робота
 
+Для установки пакета, необходимо склонировать репозиторий в вашу папку `ros_catkin_ws/src`
+
+```bash
+cd ~/ros_catkin_ws/src
+git clone https://github.com/voltbro/joybro
+```
+
+Далее необходимо запустить процесс сборки пакета
+
+```bash
+cd ~/catkin_ws
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic --pkg=joybro
+```
+
+Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
+
+```bash
+sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
+```
 
 ### Подключение Джойстика
 
@@ -71,16 +91,16 @@ roslaunch joybro joy_teleop.launch
 
 ### Созадение библиотеки ros_lib
 
-Для работы с Arduinо, необходимо произвести "сборку" библиотеки ROS для Arduino
+Для работы с Arduinо, необходимо произвести "сборку" библиотеки ROS для Arduino !!!на роботе!!!
 
 ```bash
 cd 
 rosrun rosserial_arduino make_libraries.py .
 ```
 
-Команда создаст директорию `ros_lib` которую необходимо переписать в папку библиотек Arduino. Обычно это папка `~/Arduino/libraries`
+Команда создаст директорию `ros_lib` на распбери робота, которую необходимо переписать в папку библиотек Arduino на том компьютере на котором вы будете заливать скетчи Arduino в контроллер Arduino Mega. Обычно это папка `~/Arduino/libraries`
 
-Необходимо выполнить пересборку библиотек, после установки пакета joybro, для того чтобы в библиотеке появился .h файл для работы с сообщением джойстика `JoyBro.msg`
+Необходимо выполнить пересборку библиотек Arduino, после установки пакета joybro, для того чтобы в библиотеке появился .h файл для работы с сообщением джойстика `JoyBro.msg`
 
 Более подробно о настройке Arduino http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
 
