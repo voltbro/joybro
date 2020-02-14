@@ -14,7 +14,7 @@ git clone https://github.com/voltbro/joybro
 
 ```bash
 cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
+catkin_make --pkg joybro
 ```
 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
