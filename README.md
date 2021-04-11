@@ -40,7 +40,7 @@ git clone https://github.com/voltbro/joybro
 
 ```bash
 cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
+catkin_make --pkg=joybro
 ```
 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
@@ -56,6 +56,12 @@ sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-r
 Данный скетч с частотой 20 герц производит чтение всех контролов джойстика и передает в ROS в топик `/joybro`
 
 Тип передаваемого сообщения [msg/JoyBro.msg](https://github.com/voltbro/joybro/blob/master/msg/JoyBro.msg)
+
+Для того, чтобы пакет JoyBro мог общаться с джойстиком, надо выдать джойстику ему соответствующие права выполнив команду:
+
+```bash
+sudo chmod 777 /dev/ttyACM0
+```
 
 Для того чтобы данные из джойстика передавались в ROS, необходимо на компьютере подключенному к джойстику запустить процесс `rosserial`, который подключаеться к `Arduino` 
 и пробрасывает все сообщения в ROS
