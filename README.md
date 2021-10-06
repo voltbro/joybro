@@ -4,7 +4,7 @@
 В дистрибутиве пакета находиться прошивка необходимая для работы джойстика. Загрузите ее через Arduino IDE 
 https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino
 
-Данная прошивка создает __Издателя__ для топика /joybro в которой публикует вся данные о состоянии контролов.
+Данная прошивка создает __Издателя__ для топика /joybro в которой он публикует все данные о состоянии кнопок, слайдеров и джойстиков.
 
 ### Установка пакета на компьютер
 
@@ -22,14 +22,14 @@ cd ~/catkin_ws
 sudo ./src/catkin/bin/catkin_make --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
 ```
 
-Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
+Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
 
 ```bash
 sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
 ```
 ### Установка пакета на робота
 
-Для установки пакета, необходимо склонировать репозиторий в вашу папку `ros_catkin_ws/src`
+Для установки пакета, необходимо склонировать репозиторий в папку `ros_catkin_ws/src` на роботе
 
 ```bash
 cd ~/ros_catkin_ws/src
@@ -43,7 +43,7 @@ cd ~/catkin_ws
 sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
 ```
 
-Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его можно установить командой
+Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
 
 ```bash
 sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
@@ -53,33 +53,33 @@ sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-r
 
 На Arduino джойстика необходимо загрузить скетч [Arduino/ros_joybro/ros_joybro.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino)
 
-Данный скетч с частотой 20 герц производит чтение всех контролов джойстика и передает в ROS в топик `/joybro`
+Данный скетч с частотой 20 герц производит чтение всех контролов джойстика и передает их значения в ROS в топик `/joybro`
 
 Тип передаваемого сообщения [msg/JoyBro.msg](https://github.com/voltbro/joybro/blob/master/msg/JoyBro.msg)
 
-Для того, чтобы пакет JoyBro мог общаться с джойстиком, надо выдать джойстику ему соответствующие права выполнив команду:
+Для того, чтобы пакет JoyBro мог общаться с джойстиком, надо выдать джойстику соответствующие права в Linux выполнив команду:
 
 ```bash
 sudo chmod 777 /dev/ttyACM0
 ```
 
-Для того чтобы данные из джойстика передавались в ROS, необходимо на компьютере подключенному к джойстику запустить процесс `rosserial`, который подключаеться к `Arduino` 
+Для того, чтобы данные из джойстика передавались в ROS, необходимо на компьютере подключенному к джойстику запустить процесс `rosserial`, который подключается к `Arduino` 
 и пробрасывает все сообщения в ROS
 
-Для этого удобно запустить готовый `.launch` файл командой 
+Для этого можно запустить готовый `.launch` файл командой 
 
 ```bash
 roslaunch joybro joy_serial.launch
 ```
 
-После запуска `joy_serial.launch`, возможно проверить правильность работы, выполнив команду
+После запуска `joy_serial.launch`, можно проверить правильность работы, выполнив команду
 ```bash
 rostopic echo /joybro
 ```
 
 ### Управление роботом turtlebro/turtlebot3
 
-Python скрипт [/src/joy_teleop.py](https://github.com/voltbro/joybro/blob/master/src/joy_teleop.py) уплавления роботом через топик `/cmd_vel` 
+Python скрипт [/src/joy_teleop.py](https://github.com/voltbro/joybro/blob/master/src/joy_teleop.py) управления роботом через топик `/cmd_vel` 
 
 Для запуска и настройки параметров скрипта есть `.launch` файл, запустить его можно 
 
@@ -95,7 +95,7 @@ roslaunch joybro joy_teleop.launch
 
 Для управления полезной нагрузкой, необходимо создать собсвенный подписчик на топик `/joybro` и в зависимости от полученных данных производить необходимые операции.
 
-Пример подписчика, управляющие сервами на пинах 44,45,46
+Пример подписчика, управляющий сервами на пинах 44,45,46
 
 [Arduino/ros_joybro_subscriber/ros_joybro_subscriber.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro_subscriber/ros_joybro_subscriber.ino)
 
