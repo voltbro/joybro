@@ -19,13 +19,13 @@ git clone https://github.com/voltbro/joybro
 
 ```bash
 cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
+catkin_make --pkg=joybro
 ```
 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
 
 ```bash
-sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
+sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
 ```
 ### Установка пакета на робота
 
@@ -40,13 +40,13 @@ git clone https://github.com/voltbro/joybro
 
 ```bash
 cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/melodic --pkg=joybro
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/noetic --pkg=joybro
 ```
 
 Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
 
 ```bash
-sudo apt install ros-melodic-rosserial-arduino && sudo apt install ros-melodic-rosserial
+sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
 ```
 
 ### Подключение Джойстика
