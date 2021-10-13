@@ -176,6 +176,7 @@ include_directories(
 
 install(PROGRAMS
    src/joy_teleop.py
+   src/dog_teleop.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

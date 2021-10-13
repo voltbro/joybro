@@ -3,7 +3,7 @@
 
     <node pkg="joybro" type="dog_teleop.py" name="dog_teleop" output="screen"> 
         <param name="max_linear_vel" value="0.5" type="double"/>
-        <param name="max_angular_vel" value="2.0" type="double"/>
+        <param name="max_angular_vel" value="1.5" type="double"/>
         <param name="threshold" value="40" type="double"/>
     </node>
 </launch>
