@@ -35,10 +35,10 @@ class JoyBroTeleop():
             self.state = 'stop'
 
         if abs(data.left_y) > self.threshold:
-            linear_vel = (data.left_y/512.0)*self.max_linear_vel
+            linear_vel = ((data.left_y/512.0)*self.max_linear_vel)*(data.slider1/1024)
 
         if abs(data.left_x) > self.threshold:    
-            angular_vel = -(data.left_x/512.0)*self.max_angular_vel
+            angular_vel = -((data.left_x/512.0)*self.max_angular_vel)*(data.slider1/1024)
 
         if (self.state == 'move'):
             twist = Twist()
