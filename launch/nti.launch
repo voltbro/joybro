@@ -6,4 +6,7 @@
         <param name="max_angular_vel" value="1.0" type="double"/>
         <param name="threshold" value="40" type="double"/>
     </node>
+
+    <node pkg="joybro" type="joy_anti.py" name="joy_anti_teleop" output="screen"> 
+    </node>
 </launch>
