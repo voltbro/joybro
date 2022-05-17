@@ -33,6 +33,10 @@ class ANtiTeleop():
 
         self.zabor_ud_pub = rospy.Publisher("/zabor_ud", Int16, queue_size=5)  
 
+
+        self.flush_pump_pub = rospy.Publisher("/flush_pump", Int16, queue_size=5)
+        self.get_pump_pub = rospy.Publisher("/get_pump", Int16, queue_size=5) 
+
         self.init_pose()
 
         self.sub = rospy.Subscriber("/joybro", JoyBro, self.callback)
@@ -47,12 +51,28 @@ class ANtiTeleop():
         self.poliv_lr_pub.publish(self.poliv_LR)
 
         self.zabor_ud_pub.publish(self.zabor_UD)
+        
+        self.flush_pump_pub.publish(0)
+        self.get_pump_pub.publish(0)
+        
 
         
     def callback(self, data):
         self.top_camera_cb(data)
         self.poliv_cb(data)
         self.zabor_cb(data)
+        self.pump(data)
+
+    def pump(self,data):
+
+        if (data.btn1 == 1):
+            self.flush_pump_pub.publish(1)
+        else: self.flush_pump_pub.publish(0)    
+
+        if (data.btn2 == 1):
+            self.get_pump_pub.publish(1)
+        else: self.get_pump_pub.publish(0)    
+
 
     def zabor_cb(self, data):
         self.zabor_ud_pub.publish(int(180 - ((data.slider2/1024) * 180)))
