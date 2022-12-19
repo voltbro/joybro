@@ -11,21 +11,21 @@
 
 ### Установка пакета на компьютер
 
-Для установки пакета, необходимо склонировать репозиторий в вашу папку `catkin_ws/src`
+Для установки пакета, необходимо склонировать репозиторий в вашу папку `catkin_ws/src`:
 
 ```bash
 cd ~/catkin_ws/src
 git clone https://github.com/voltbro/joybro
 ```
 
-Далее необходимо запустить процесс сборки пакета
+Далее необходимо запустить процесс сборки пакета:
 
 ```bash
 cd ~/catkin_ws
 catkin_make --pkg=joybro
 ```
 
-Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
+Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой:
 
 ```bash
 sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
@@ -68,30 +68,37 @@ roslaunch joybro joy_serial.launch
 rostopic echo /joybro
 ```
 
-### Управление роботом turtlebro/turtlebot3
+## Управление роботом turtlebro/rover-E
 
-Python скрипт [/src/joy_teleop.py](https://github.com/voltbro/joybro/blob/master/src/joy_teleop.py) управления роботом через топик `/cmd_vel` 
+Python-скрипт [/src/joy_teleop.py](https://github.com/voltbro/joybro/blob/master/src/joy_teleop.py) пакета JoyBro предназначен для управления роботами через топик `/cmd_vel` 
 
-Для запуска и настройки параметров скрипта есть `.launch` файл, запустить его можно 
+Для того, чтобы на компьютере появились топики с роботов необходимо указать по какому адресу находится мастер-нода (мастер-нода робота) командами:
+
+```bash
+export ROS_MASTER_URI=http://<IP-адрес робота>:11311/
+export ROS_HOSTNAME=<IP-адрес компьютера>
+```
+
+Для запуска и настройки параметров скрипта есть `.launch` файл `joy_teleop.launch`, запускать его необходимо в том же терминале, в котором указан адрес мастер-нода робота: 
 
 ```bash
 roslaunch joybro joy_teleop.launch
 ```
 
-Файл joy_teleop.launch запускает собсвенный процесс `rosserial`, поэтому необходимо остановить все запущенные ранее процессы `rosserial`
+Файл joy_teleop.launch запускает собственный процесс `rosserial`, поэтому необходимо остановить все запущенные ранее процессы `rosserial`.
 
 Управление перемещенияем робота, происходит при перемещении левого "стика" на джойстике, только при нажатой кнопке `btn3` (правая верхняя кнопки)
 
-### Управление полезной нагрузкой с Arduino Mega платы turtlebro
+### Управление полезной нагрузкой с Arduino Mega платы turtleboard
 
 Для управления полезной нагрузкой, необходимо создать собсвенный подписчик на топик `/joybro` и в зависимости от полученных данных производить необходимые операции.
 
-Пример подписчика, управляющий сервами на пинах 44,45,46
+Пример подписчика, управляющий сервоприводами на пинах 44,45,46
 
 [Arduino/ros_joybro_subscriber/ros_joybro_subscriber.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro_subscriber/ros_joybro_subscriber.ino)
 
 
-### Созадение библиотеки ros_lib
+### Созданение библиотеки ros_lib
 
 Для работы с Arduinо, необходимо произвести "сборку" библиотеки ROS для Arduino !!!на роботе!!!
 
@@ -105,28 +112,3 @@ rosrun rosserial_arduino make_libraries.py .
 Необходимо выполнить пересборку библиотек Arduino, после установки пакета joybro, для того чтобы в библиотеке появился .h файл для работы с сообщением джойстика `JoyBro.msg`
 
 Более подробно о настройке Arduino http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
-
-
-
-### Установка пакета на робота
-
-Для установки пакета, необходимо склонировать репозиторий в папку `ros_catkin_ws/src` на роботе
-
-```bash
-cd ~/ros_catkin_ws/src
-git clone https://github.com/voltbro/joybro
-```
-
-Далее необходимо запустить процесс сборки пакета
-
-```bash
-cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/noetic --pkg=joybro
-```
-
-Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
-
-```bash
-sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
-```
-
