@@ -1,10 +1,13 @@
-# Пакет ROS для джойстика joybro
+# Пакет ROS для джойстика JoyBro
 
-### Загрузка скетча(прошивки) на Джойстик
-В дистрибутиве пакета находиться прошивка необходимая для работы джойстика. Загрузите ее через Arduino IDE 
-https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino
+Пакет предназначен для работы [джойстика JoyBro](http://www.voltbro.ru/joybro). С помощью данного джойстика можно управлять роботами [TurtleBro](http://www.voltbro.ru/turtlebro) и [Rover-E](http://www.voltbro.ru/rover-e).
 
-Данная прошивка создает __Издателя__ для топика /joybro в которой он публикует все данные о состоянии кнопок, слайдеров и джойстиков.
+
+## Первое включение джойстика
+
+### Создание рабочего пространства
+
+Для работы с джойстиком вам понадобится установленный ROS Noetic и сконфигурированное рабочее пространство. Подробнее об этом читайте в разделе "Создание рабочего пространства" по [ссылке](http://docs.voltbro.ru/starting-ros/install/).
 
 ### Установка пакета на компьютер
 
@@ -27,27 +30,15 @@ catkin_make --pkg=joybro
 ```bash
 sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
 ```
-### Установка пакета на робота
 
-Для установки пакета, необходимо склонировать репозиторий в папку `ros_catkin_ws/src` на роботе
+### Загрузка скетча (прошивки) на джойстик
 
-```bash
-cd ~/ros_catkin_ws/src
-git clone https://github.com/voltbro/joybro
-```
+В дистрибутиве пакета находится прошивка `ros_joybro.ino` [Arduino/ros_joybro/ros_joybro.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino) необходимая для работы джойстика. Загрузите ее на джойстик через Arduino IDE:
 
-Далее необходимо запустить процесс сборки пакета
+https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino
 
-```bash
-cd ~/catkin_ws
-sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/noetic --pkg=joybro
-```
+Данная прошивка создает __Издателя__ для топика /joybro, в который он публикует все данные о состоянии кнопок, слайдеров и джойстиков.
 
-Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
-
-```bash
-sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
-```
 
 ### Подключение Джойстика
 
@@ -114,4 +105,28 @@ rosrun rosserial_arduino make_libraries.py .
 Необходимо выполнить пересборку библиотек Arduino, после установки пакета joybro, для того чтобы в библиотеке появился .h файл для работы с сообщением джойстика `JoyBro.msg`
 
 Более подробно о настройке Arduino http://wiki.ros.org/rosserial_arduino/Tutorials/Arduino%20IDE%20Setup
+
+
+
+### Установка пакета на робота
+
+Для установки пакета, необходимо склонировать репозиторий в папку `ros_catkin_ws/src` на роботе
+
+```bash
+cd ~/ros_catkin_ws/src
+git clone https://github.com/voltbro/joybro
+```
+
+Далее необходимо запустить процесс сборки пакета
+
+```bash
+cd ~/catkin_ws
+sudo ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/noetic --pkg=joybro
+```
+
+Для работы, может понадобиться пакет `rosserial`. Если пакет не установлен, то его нужно установить командой
+
+```bash
+sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-rosserial
+```
 
