@@ -33,20 +33,17 @@ sudo apt install ros-noetic-rosserial-arduino && sudo apt install ros-noetic-ros
 
 ### Загрузка скетча (прошивки) на джойстик
 
-В дистрибутиве пакета находится прошивка `ros_joybro.ino` [Arduino/ros_joybro/ros_joybro.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino) необходимая для работы джойстика. Загрузите ее на джойстик через Arduino IDE:
+Для загрузки необходимой прошивки на джойстик потребуется наличие библиотеки `ros_lib` в Arduino IDE. Информацию по установке данной библиотеке можно найти [здесь](https://manual.turtlebro.ru/plata-turtleboard/arduino#biblioteka-arduino-ros_lib).
+
+В дистрибутиве пакета находится прошивка [Arduino/ros_joybro/ros_joybro.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino) необходимая для работы джойстика. Загрузите ее на джойстик через Arduino IDE:
 
 https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino
 
-Данная прошивка создает __Издателя__ для топика /joybro, в который он публикует все данные о состоянии кнопок, слайдеров и джойстиков.
-
-
-### Подключение Джойстика
-
-На Arduino джойстика необходимо загрузить скетч [Arduino/ros_joybro/ros_joybro.ino](https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino)
-
-Данный скетч с частотой 20 герц производит чтение всех контролов джойстика и передает их значения в ROS в топик `/joybro`
+Данная прошивка публикует все данные о состоянии кнопок, слайдеров и стиков с JoyBro в ROS в топик `/joybro` с частотой 20 Герц.
 
 Тип передаваемого сообщения [msg/JoyBro.msg](https://github.com/voltbro/joybro/blob/master/msg/JoyBro.msg)
+
+### Выдача прав пользователя
 
 Для того, чтобы пакет JoyBro мог общаться с джойстиком, надо выдать джойстику соответствующие права в Linux выполнив команду:
 
@@ -54,16 +51,22 @@ https://github.com/voltbro/joybro/blob/master/Arduino/ros_joybro/ros_joybro.ino
 sudo chmod 777 /dev/ttyACM0
 ```
 
-Для того, чтобы данные из джойстика передавались в ROS, необходимо на компьютере подключенному к джойстику запустить процесс `rosserial`, который подключается к `Arduino` 
-и пробрасывает все сообщения в ROS
+Для того, чтобы данные из джойстика передавались в ROS, необходимо на компьютере подключенному к джойстику запустить процесс `rosserial`, который подключается к `Arduino` и пробрасывает все сообщения в ROS.
 
-Для этого можно запустить готовый `.launch` файл командой 
+Для этого сначала необходимо запустить мастер-ноду на компьютере командой:
+
+```bash
+roscore
+```
+
+Далее, не останавливая работы мастер-ноды и не закрывая терминал, в новом окне запустить готовый `.launch` файл командой: 
 
 ```bash
 roslaunch joybro joy_serial.launch
 ```
 
-После запуска `joy_serial.launch`, можно проверить правильность работы, выполнив команду
+После запуска `joy_serial.launch`, можно проверить правильность работы, выполнив команду в новом окне:
+
 ```bash
 rostopic echo /joybro
 ```
